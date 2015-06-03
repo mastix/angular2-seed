@@ -1,12 +1,9 @@
 {
-  "name": "angular2-seed",
-  "version": "0.0.0",
-  "description": "",
+  "name": "person-demo-angular2-seed",
+  "version": "0.0.1",
+  "description": "This demo is based on mgechev's Angular 2.0 see project. You can find more information about this demo here: http://project-webdev.blogspot.de/2015/05/create-site-based-on-docker-part1.html",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Minko Gechev <mgechev>",
+  "author": "Sascha Sambale <mastixmc>",
   "license": "MIT",
   "devDependencies": {
     "connect": "^3.3.5",
@@ -27,5 +24,9 @@
     "systemjs": "^0.15.0",
     "zone.js": "^0.4.1",
     "reflect-metadata": "0.1.0"
+  },
+  "repository" :
+  { "type" : "git",
+    "url" : "https://github.com/mastix/person-demo-angular2-seed.git"
   }
 }
