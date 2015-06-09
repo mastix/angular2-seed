@@ -2,15 +2,15 @@
 import {Component, View, bootstrap, NgFor} from 'angular2/angular2';
 import {RouteConfig, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
 
-import {Home} from './components/home/home';
-import {About} from './components/about/about';
+import {PersonList} from './components/personlist/personlist';
+import {PersonAdd} from './components/personadd/personadd';
 
 @Component({
   selector: 'app'
 })
 @RouteConfig([
-  { path: '/', component: Home, as: 'home' },
-  { path: '/about', component: About, as: 'about' }
+  { path: '/', component: PersonList, as: 'personlist' },
+  { path: '/personadd', component: PersonAdd, as: 'personadd' }
 ])
 @View({
   templateUrl: './app.html?v=<%= VERSION %>',
