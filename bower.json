@@ -1,0 +1,20 @@
+{
+  "name": "person-demo",
+  "version": "0.0.1",
+  "homepage": "http://project-webdev.blogspot.com",
+  "authors": [
+    "Sascha Sambale <mastixmc@gmail.com>"
+  ],
+  "description": "A little person demo for my project-webdev docker blog series.",
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

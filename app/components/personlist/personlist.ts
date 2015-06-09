@@ -7,20 +7,20 @@ import {PersonService} from '../../services/PersonService';
 import {Person} from '../../models/Person';
 
 @Component({
-  selector: 'component-1',
-  appInjector: [PersonService]
+    selector: 'personlist',
+    appInjector: [PersonService]
 })
 @View({
-  templateUrl: './components/personlist/personlist.html?v=<%= VERSION %>',
-  directives: [NgFor]
+    templateUrl: './components/personlist/personlist.html?v=<%= VERSION %>',
+    directives: [NgFor]
 })
 export class PersonList {
-  person: Person;
-  personArray: Array<string>;
+    person:Person;
+    personArray:Array<string>;
 
-  constructor(ps: PersonService) {
-    ps.getAllPersons().then((array)=>{
-      this.personArray = array.map((p)=>JSON.stringify(p));
-    });
-  }
+    constructor(ps:PersonService) {
+        ps.getAllPersons().then((array)=> {
+            this.personArray = array;
+        });
+    }
 }

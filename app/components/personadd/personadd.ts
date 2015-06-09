@@ -7,17 +7,14 @@ import {PersonService} from '../../services/PersonService';
 import {Person} from '../../models/Person';
 
 @Component({
-  selector: 'component-2',
-  appInjector: [PersonService]
+    selector: 'personadd',
+    appInjector: [PersonService]
 })
 @View({
-  templateUrl: './components/personadd/personadd.html?v=<%= VERSION %>',
+    templateUrl: './components/personadd/personadd.html?v=<%= VERSION %>',
 })
 export class PersonAdd {
-   addPerson(theId, theFirstName, theLastName) {
-       console.log("received save event");
-       let ps = new PersonService();
-       ps.addPerson(new Person(theId, theFirstName, theLastName));
-       console.log('Added person! :)');
-   }
+    addPerson(theId, theFirstName, theLastName) {
+        new PersonService().addPerson(new Person(theId, theFirstName, theLastName));
+    }
 }

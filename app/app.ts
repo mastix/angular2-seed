@@ -6,17 +6,17 @@ import {PersonList} from './components/personlist/personlist';
 import {PersonAdd} from './components/personadd/personadd';
 
 @Component({
-  selector: 'app'
+    selector: 'app'
 })
 @RouteConfig([
-  { path: '/', component: PersonList, as: 'personlist' },
-  { path: '/personadd', component: PersonAdd, as: 'personadd' }
+    {path: '/', component: PersonList, as: 'personlist'},
+    {path: '/personadd', component: PersonAdd, as: 'personadd'}
 ])
 @View({
-  templateUrl: './app.html?v=<%= VERSION %>',
-  directives: [RouterOutlet, RouterLink]
+    templateUrl: './app.html?v=<%= VERSION %>',
+    directives: [RouterOutlet, RouterLink]
 })
-class App {}
-
+class App {
+}
 
 bootstrap(App, [routerInjectables]);
