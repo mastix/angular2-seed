@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Sascha Sambale <mastixmc>",
   "license": "MIT",
+  "scripts": {
+    "postinstall": "bower install"
+  },
   "devDependencies": {
     "connect": "^3.3.5",
     "del": "^1.1.1",
