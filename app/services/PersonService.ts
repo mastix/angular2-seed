@@ -1,16 +1,18 @@
 import {Person} from '../models/Person';
 
 export class PersonService {
-    persons = [new Person("1", "Sascha", "Sambale"), new Person("2", "Max", "Mustermann")];
-
-    getAllPersons():Array<Person> {
-        console.log("GetAllPersons");
-        console.log(this.persons);
-        this.getJSON('http://api.sascha-sambale.de/person').then(function (retrievedPersons){
-            console.log("Received persons from API!");
-            console.log(retrievedPersons);
+   // persons = [new Person("1", "Sascha", "Sambale"), new Person("2", "Max", "Mustermann")];
+    personURL = 'http://api.sascha-sambale.de/person';
+    getAllPersons() {
+        var personService = this;
+        return new Promise(function (resolve,reject){
+            personService.getJSON(personService.personURL).then(function (retrievedPersons){
+                if(!retrievedPersons || retrievedPersons.length==0){
+                    reject("ERROR fetching persons...");
+                }
+                resolve(retrievedPersons.map((p)=>new Person(p["id"],p["firstname"],p["lastname"])));
+            });
         });
-        return this.persons;
     }
 
     /*getPerson(theId:string):Person {
@@ -20,11 +22,10 @@ export class PersonService {
     addPerson(thePerson:Person) {
         console.log("Added person!");
         console.log(thePerson);
-        this.persons.push(thePerson);
-        console.log(this.persons);
+        this.postJSON('http://api.sascha-sambale.de/person',thePerson).then((response)=>alert('Added person successfully! Click list to see all persons.'));
     }
 
-    private getJSON(url) {
+    getJSON(url:string) {
         return new Promise(function(resolve, reject){
             var xhr = new XMLHttpRequest();
             xhr.open('GET', url);
@@ -36,6 +37,30 @@ export class PersonService {
             function handler() {
                 if (this.readyState === this.DONE) {
                     if (this.status === 200) {
+                        resolve(this.response);
+                    } else {
+                        reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
+                    }
+                }
+            }
+        });
+    }
+
+    postJSON(url:string, person:Person) {
+        console.log('postJSON');
+        return new Promise(function(resolve, reject){
+            var xhr = new XMLHttpRequest();
+            var params = `id=${person.getId()}&firstname=${person.getFirstName()}&lastname=${person.getLastName()}`;
+            console.log(params);
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = handler;
+            xhr.responseType = 'json';
+            xhr.setRequestHeader('Accept', 'application/json');
+            xhr.send(params);
+            function handler() {
+                if (this.readyState === this.DONE) {
+                    if (this.status === 201) {
                         resolve(this.response);
                     } else {
                         reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));

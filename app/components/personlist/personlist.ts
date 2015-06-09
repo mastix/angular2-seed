@@ -19,6 +19,8 @@ export class PersonList {
   personArray: Array<string>;
 
   constructor(ps: PersonService) {
-    this.personArray = ps.getAllPersons().map((p)=>JSON.stringify(p));
+    ps.getAllPersons().then((array)=>{
+      this.personArray = array.map((p)=>JSON.stringify(p));
+    });
   }
 }
