@@ -1,13 +1,10 @@
 import {Person} from '../models/Person';
 
 export class PersonService {
-    // persons = [new Person("1", "Sascha", "Sambale"), new Person("2", "Max", "Mustermann")];
-    personURL = 'http://api.sascha-sambale.de/person';
-
     getAllPersons() {
         var personService = this;
         return new Promise(function (resolve, reject) {
-            personService.getJSON(personService.personURL).then(function (retrievedPersons) {
+            personService.getJSON('http://api.yourdomain.com/person').then(function (retrievedPersons) {
                 if (!retrievedPersons || retrievedPersons.length == 0) {
                     reject("ERROR fetching persons...");
                 }
@@ -16,14 +13,8 @@ export class PersonService {
         });
     }
 
-    /*getPerson(theId:string):Person {
-     return this.persons.filter((p)->p.id === theId);
-     }*/
-
     addPerson(thePerson:Person) {
-        console.log("Added person!");
-        console.log(thePerson);
-        this.postJSON('http://api.sascha-sambale.de/person', thePerson).then((response)=>alert('Added person successfully! Click list to see all persons.'));
+        this.postJSON('http://api.yourdomain.com/person', thePerson).then((response)=>alert('Added person successfully! Click list to see all persons.'));
     }
 
     getJSON(url:string) {
@@ -48,11 +39,9 @@ export class PersonService {
     }
 
     postJSON(url:string, person:Person) {
-        console.log('postJSON');
         return new Promise(function (resolve, reject) {
             var xhr = new XMLHttpRequest();
             var params = `id=${person.getId()}&firstname=${person.getFirstName()}&lastname=${person.getLastName()}`;
-            console.log(params);
             xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = handler;

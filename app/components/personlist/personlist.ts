@@ -15,7 +15,6 @@ import {Person} from '../../models/Person';
     directives: [NgFor]
 })
 export class PersonList {
-    person:Person;
     personArray:Array<string>;
 
     constructor(ps:PersonService) {
